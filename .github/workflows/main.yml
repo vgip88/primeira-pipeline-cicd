@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Obtendo o código
-      uses: actions/checkout@v4  # Atualizado para a versão major estável estável se necessário
+      uses: actions/checkout@v6.0.2 # Atualizado para a versão major estável estável se necessário
 
     - name: Autenticação no Docker Hub
-      uses: docker/login-action@v3
+      uses: docker/login-action@v4.2.0
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
