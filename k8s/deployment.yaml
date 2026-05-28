@@ -1,8 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web
+  name: web                  # Mantemos o nome 'web' para ele atualizar o atual
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: web
@@ -12,19 +13,21 @@ spec:
         app: web
     spec:
       containers:
-      - name: web
-        image: fabricioveronez/primeira-pipeline-cicd
-        ports:
-        - containerPort: 5000
---- 
+        - name: go-app
+          image: vgip88/aula-primeira-pipeline:v17  # <--- SUA imagem aqui
+          ports:
+            - containerPort: 80
+
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: web
+  name: web-service
 spec:
   selector:
-    app: web
+    app: web                 # Aponta para o app: web do Deployment acima
   ports:
-  - port: 80
-    targetPort: 5000
+    - port: 80
+      targetPort: 80
   type: LoadBalancer
+
